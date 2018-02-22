@@ -1,12 +1,12 @@
 ---
 title: "Homework 1"
 author: "Phoebe Abramowitz"
-date: "2/19/2018"
+date: "2/24/2018"
 output: github_document
 ---
 #Question 2
 ```{r setup, include=FALSE}
-#why ever have anything as an integer why not all reals?
+
 imports85_column_types <- list(
   'real',
   'real',
@@ -65,7 +65,7 @@ imports85_column_names <- c(
 )
 
 imports85 <- read.csv('imports-85.data', col.names=imports85_column_names,
-         colClasses = imports85_column_types, na.strings="?")
+         colClasses = imports85_column_types, na.strings=c("?","NA"))
 str(imports85)
 library(readr)
 imports85_2 <- read_csv('imports-85.data', col_names = imports85_column_names, na="?",
@@ -132,8 +132,53 @@ mean(gas_cars[,'price'],na.rm=TRUE)
 mean(diesel_cars[,'price'],na.rm=TRUE)
 #The Make of the Car with 12 cylinders is:
 imports85[imports85$num_of_cylinders=='twelve',"make"]
-#The make that has the most diesel cars is
+#The make that has the most diesel cars + number of diesel cars is
 diesel <- imports85[imports85$fuel_type=='diesel',]
-pivot <- (table(diesel$make))
-pivot
+pivot_diesel_by_make <- (table(diesel$make))
+sort(pivot_diesel_by_make,decreasing=TRUE)[1]
+
+#Price of the Car with the Most horsepower
+imports85$horsepower
+max(imports85$horsepower, na.rm=TRUE)
+imports85$horsepower==max(imports85$horsepower, na.rm=TRUE)
+imports85[which.max(imports85$horsepower),'price' ]
+imports85[,"price"][which.max(imports85$horsepower)]
+
+#Bottom 10th percentile
+bottom_city_mpg <- quantile(imports85$city_mpg,0.1)
+#Top 10th percentile
+top_highway_mpg <- quantile(imports85$highway_mpg,0.9)
+#median in bottom
+#####ask about this
+median(imports85[imports85$city_mpg<=bottom_city_mpg,'price'],na.rm=TRUE)
+
+```
+#Question 6
+
+a) "NULL" is returned
+b)mtcars[, mpg] fails to return the vector 
+c)This is becuase putting mpg as the second index indicates that we're trying to retrieve the row by it's name, which should be a character in quotes to indicate that its a row name.
+d)
+
+#Question 7
+```{r}
+qdat <-  na.omit(imports85[,c(
+  'wheel_base',
+  'length',
+  'width',
+  'height',
+  'curb_weight',
+  'engine_size',
+  'bore',
+  'stroke',
+  'compression_ratio',
+  'horsepower',
+  'peak_rpm',
+  'city_mpg',
+  'highway_mpg',
+  'price')])
+library(corrplot)
+qdat <-  cor(qdat)
+corrplot(qdat,method='circle')
+corrplot(qdat,method='color',order="hclust")
 ```
