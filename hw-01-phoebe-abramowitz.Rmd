@@ -111,7 +111,7 @@ c)If you don't specify how missing values are codified, then the data type of an
 d) The second object is bigger becuase characters take twice as many bits as integers and we specified many types as characters.
 
 e)If you do it as an R matrix, all the ones of the type character become NA becuase they're data types that can't be transformed into integers.
-Ask about this and Github
+
 
 #Question 4
 ```{r}
@@ -149,7 +149,6 @@ bottom_city_mpg <- quantile(imports85$city_mpg,0.1)
 #Top 10th percentile
 top_highway_mpg <- quantile(imports85$highway_mpg,0.9)
 #median in bottom
-#####ask about this
 median(imports85[imports85$city_mpg<=bottom_city_mpg,'price'],na.rm=TRUE)
 
 ```
@@ -158,7 +157,8 @@ median(imports85[imports85$city_mpg<=bottom_city_mpg,'price'],na.rm=TRUE)
 a) "NULL" is returned
 b)mtcars[, mpg] fails to return the vector 
 c)This is becuase putting mpg as the second index indicates that we're trying to retrieve the row by it's name, which should be a character in quotes to indicate that its a row name.
-d)
+d) YES you can include and R list of the proper length as the column of a data frame because the data frame itself is a list.
+e)When you apply as.list() to a data frame, 
 
 #Question 7
 ```{r}
@@ -179,6 +179,7 @@ qdat <-  na.omit(imports85[,c(
   'price')])
 library(corrplot)
 qdat <-  cor(qdat)
+#Corellelograms
 corrplot(qdat,method='circle')
 corrplot(qdat,method='color',order="hclust")
 ```
