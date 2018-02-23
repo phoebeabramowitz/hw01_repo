@@ -178,8 +178,45 @@ qdat <-  na.omit(imports85[,c(
   'highway_mpg',
   'price')])
 library(corrplot)
-qdat <-  cor(qdat)
+cor_qdat <-  cor(qdat)
+
 #Corellelograms
-corrplot(qdat,method='circle')
-corrplot(qdat,method='color',order="hclust")
+corrplot(cor_qdat,method='circle')
+corrplot(cor_qdat,method='color',order="hclust")
 ```
+These two correlograms let us observe that city mpg and highway mpg are more positively correlated with each other than any two variables. It also shows us that wheelbase,length,width,curb weight,bore,horsepower,engine size,and price are all fairly positively correlated with each other. Comparatively, those variables are all negatively correlated with mpg(both city and highway). Stroke is entirely or almost entirely uncorrelated with many variables.
+
+#Question 8.1
+```{r}
+imports85_pca_prcomp <- prcomp(qdat,scale.=TRUE)
+imports85_pca_prcomp
+
+eigs <- imports85_pca_prcomp$sdev^2
+eigs_perc <- 100 * eigs / sum(eigs)
+eigs_cum <- cumsum(eigs_perc)
+
+eigs_df <- data.frame(
+  eigenvalue = eigs,
+  percentage = eigs_perc,
+  'cumulative percentage' = eigs_cum
+)
+print(round(eigs_df, 4), print.gap = 2)
+barplot(eigs, las = 1, names.arg = paste('PC', 1:ncol(qdat)), 
+        main = 'Bar-chart of eigenvalues')
+```
+53.9% of the variation in the data is captured by the first PC, 16.2% is captured by the second PC, and 8.8% of the variation is captured by the third PC. ~89% of the variation in data is captured by the first 3 PC.
+##Question 8.2
+```{r}
+imports85_pca_prcomp$x
+
+plot(imports85_pca_prcomp$x, type = "n", las = 1)
+abline(h = 0, v = 0)
+points(imports85_pca_prcomp$x[ ,1], imports85_pca_prcomp$x[ ,2], pch=19,
+       col = "blue",main="Individual Vehicles")
+
+plot(imports85_pca_prcomp$rotation[,1],imports85_pca_prcomp$rotation[,2],col='red',
+     xlab='PC2',ylab = 'PC1',pch=19,main="Eigenvectors")
+text(imports85_pca_prcomp$rotation[,1],imports85_pca_prcomp$rotation[,2],labels=colnames(qdat))
+```
+These plots demonstrate that way_mpg,city_mpg, then horespower,engine size, bore,curb weight,width,length,and wheel base contribute largely to PC2. This makes sense as the latter group is highly negatively correlated with the former. Similarly, peak rpm and compression ration contribute heavily to PC1.
+
