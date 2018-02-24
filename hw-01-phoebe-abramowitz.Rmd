@@ -5,7 +5,7 @@ date: "2/24/2018"
 output: github_document
 ---
 #Question 2
-```{r setup, include=FALSE}
+```{r}
 
 imports85_column_types <- list(
   'real',

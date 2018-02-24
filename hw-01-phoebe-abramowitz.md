@@ -6,6 +6,217 @@ Phoebe Abramowitz
 Question 2
 ==========
 
+``` r
+imports85_column_types <- list(
+  'real',
+  'real',
+  'character',
+  'character',
+  'character',
+  'character',
+  'character',
+  'character',
+  'character',
+  'real',
+  'real',
+  'real',
+  'real',
+  'integer',
+  'character',
+  'character',
+  'integer',
+  'character',
+  'real',
+  'real',
+  'real',
+  'integer',
+  'integer',
+  'integer',
+  'integer',
+  'integer'
+)
+imports85_column_names <- c(
+  'symboling',
+  'normalized_losses',
+  'make',
+  'fuel_type',
+  'aspiration',
+  'num_of_doors',
+  'body_style',
+  'drive_wheels',
+  'engine_location',
+  'wheel_base',
+  'length',
+  'width',
+  'height',
+  'curb_weight',
+  'engine_type',
+  'num_of_cylinders',
+  'engine_size',
+  'fuel_system',
+  'bore',
+  'stroke',
+  'compression_ratio',
+  'horsepower',
+  'peak_rpm',
+  'city_mpg',
+  'highway_mpg',
+  'price'
+)
+
+imports85 <- read.csv('imports-85.data', col.names=imports85_column_names,
+         colClasses = imports85_column_types, na.strings=c("?","NA"))
+str(imports85)
+```
+
+    ## 'data.frame':    204 obs. of  26 variables:
+    ##  $ symboling        : num  3 1 2 2 2 1 1 1 0 2 ...
+    ##  $ normalized_losses: num  NA NA 164 164 NA 158 NA 158 NA 192 ...
+    ##  $ make             : chr  "alfa-romero" "alfa-romero" "audi" "audi" ...
+    ##  $ fuel_type        : chr  "gas" "gas" "gas" "gas" ...
+    ##  $ aspiration       : chr  "std" "std" "std" "std" ...
+    ##  $ num_of_doors     : chr  "two" "two" "four" "four" ...
+    ##  $ body_style       : chr  "convertible" "hatchback" "sedan" "sedan" ...
+    ##  $ drive_wheels     : chr  "rwd" "rwd" "fwd" "4wd" ...
+    ##  $ engine_location  : chr  "front" "front" "front" "front" ...
+    ##  $ wheel_base       : num  88.6 94.5 99.8 99.4 99.8 ...
+    ##  $ length           : num  169 171 177 177 177 ...
+    ##  $ width            : num  64.1 65.5 66.2 66.4 66.3 71.4 71.4 71.4 67.9 64.8 ...
+    ##  $ height           : num  48.8 52.4 54.3 54.3 53.1 55.7 55.7 55.9 52 54.3 ...
+    ##  $ curb_weight      : int  2548 2823 2337 2824 2507 2844 2954 3086 3053 2395 ...
+    ##  $ engine_type      : chr  "dohc" "ohcv" "ohc" "ohc" ...
+    ##  $ num_of_cylinders : chr  "four" "six" "four" "five" ...
+    ##  $ engine_size      : int  130 152 109 136 136 136 136 131 131 108 ...
+    ##  $ fuel_system      : chr  "mpfi" "mpfi" "mpfi" "mpfi" ...
+    ##  $ bore             : num  3.47 2.68 3.19 3.19 3.19 3.19 3.19 3.13 3.13 3.5 ...
+    ##  $ stroke           : num  2.68 3.47 3.4 3.4 3.4 3.4 3.4 3.4 3.4 2.8 ...
+    ##  $ compression_ratio: num  9 9 10 8 8.5 8.5 8.5 8.3 7 8.8 ...
+    ##  $ horsepower       : int  111 154 102 115 110 110 110 140 160 101 ...
+    ##  $ peak_rpm         : int  5000 5000 5500 5500 5500 5500 5500 5500 5500 5800 ...
+    ##  $ city_mpg         : int  21 19 24 18 19 19 19 17 16 23 ...
+    ##  $ highway_mpg      : int  27 26 30 22 25 25 25 20 22 29 ...
+    ##  $ price            : int  16500 16500 13950 17450 15250 17710 18920 23875 NA 16430 ...
+
+``` r
+library(readr)
+imports85_2 <- read_csv('imports-85.data', col_names = imports85_column_names, na="?",
+                        col_types = list(
+                          'symboling' <- col_double(),
+                          'normalized_losses' <- col_double(),
+                          'make' <- col_character(),
+                          'fuel_type' <- col_character(),
+                          'aspiration'<- col_character(),
+                          'num_of_doors'<- col_character(),
+                          'body_style'<- col_character(),
+                          'drive_wheels'<- col_character(),
+                          'engine_location'<- col_character(),
+                          'wheel_base'<- col_double(),
+                          'length'<- col_double(),
+                          'width'<- col_double(),
+                              'height'<- col_double(),
+                              'curb_weight' <- col_integer(),
+                              'engine_type'<- col_character(),
+                              'num_of_cylinders'<- col_character(),
+                              'engine_size'<- col_integer(),
+                              'fuel_system'<- col_character(),
+                              'bore'<- col_double(),
+                              'stroke'<- col_double(),
+                              'compression_ratio'<- col_double(),
+                              'horsepower'<- col_integer(),
+                              'peak_rpm'<- col_integer(),
+                              'city_mpg'<- col_integer(),
+                              'highway_mpg'<- col_integer(),
+                              'price'<- col_integer()
+                             ))
+                               
+str(imports85_2)
+```
+
+    ## Classes 'tbl_df', 'tbl' and 'data.frame':    205 obs. of  26 variables:
+    ##  $ symboling        : num  3 3 1 2 2 2 1 1 1 0 ...
+    ##  $ normalized_losses: num  NA NA NA 164 164 NA 158 NA 158 NA ...
+    ##  $ make             : chr  "alfa-romero" "alfa-romero" "alfa-romero" "audi" ...
+    ##  $ fuel_type        : chr  "gas" "gas" "gas" "gas" ...
+    ##  $ aspiration       : chr  "std" "std" "std" "std" ...
+    ##  $ num_of_doors     : chr  "two" "two" "two" "four" ...
+    ##  $ body_style       : chr  "convertible" "convertible" "hatchback" "sedan" ...
+    ##  $ drive_wheels     : chr  "rwd" "rwd" "rwd" "fwd" ...
+    ##  $ engine_location  : chr  "front" "front" "front" "front" ...
+    ##  $ wheel_base       : num  88.6 88.6 94.5 99.8 99.4 ...
+    ##  $ length           : num  169 169 171 177 177 ...
+    ##  $ width            : num  64.1 64.1 65.5 66.2 66.4 66.3 71.4 71.4 71.4 67.9 ...
+    ##  $ height           : num  48.8 48.8 52.4 54.3 54.3 53.1 55.7 55.7 55.9 52 ...
+    ##  $ curb_weight      : int  2548 2548 2823 2337 2824 2507 2844 2954 3086 3053 ...
+    ##  $ engine_type      : chr  "dohc" "dohc" "ohcv" "ohc" ...
+    ##  $ num_of_cylinders : chr  "four" "four" "six" "four" ...
+    ##  $ engine_size      : int  130 130 152 109 136 136 136 136 131 131 ...
+    ##  $ fuel_system      : chr  "mpfi" "mpfi" "mpfi" "mpfi" ...
+    ##  $ bore             : num  3.47 3.47 2.68 3.19 3.19 3.19 3.19 3.19 3.13 3.13 ...
+    ##  $ stroke           : num  2.68 2.68 3.47 3.4 3.4 3.4 3.4 3.4 3.4 3.4 ...
+    ##  $ compression_ratio: num  9 9 9 10 8 8.5 8.5 8.5 8.3 7 ...
+    ##  $ horsepower       : int  111 111 154 102 115 110 110 110 140 160 ...
+    ##  $ peak_rpm         : int  5000 5000 5000 5500 5500 5500 5500 5500 5500 5500 ...
+    ##  $ city_mpg         : int  21 21 19 24 18 19 19 19 17 16 ...
+    ##  $ highway_mpg      : int  27 27 26 30 22 25 25 25 20 22 ...
+    ##  $ price            : int  13495 16500 16500 13950 17450 15250 17710 18920 23875 NA ...
+    ##  - attr(*, "spec")=List of 2
+    ##   ..$ cols   :List of 26
+    ##   .. ..$ symboling        : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ normalized_losses: list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ make             : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ fuel_type        : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ aspiration       : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ num_of_doors     : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ body_style       : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ drive_wheels     : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ engine_location  : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ wheel_base       : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ length           : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ width            : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ height           : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ curb_weight      : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+    ##   .. ..$ engine_type      : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ num_of_cylinders : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ engine_size      : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+    ##   .. ..$ fuel_system      : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+    ##   .. ..$ bore             : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ stroke           : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ compression_ratio: list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+    ##   .. ..$ horsepower       : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+    ##   .. ..$ peak_rpm         : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+    ##   .. ..$ city_mpg         : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+    ##   .. ..$ highway_mpg      : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+    ##   .. ..$ price            : list()
+    ##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+    ##   ..$ default: list()
+    ##   .. ..- attr(*, "class")= chr  "collector_guess" "collector"
+    ##   ..- attr(*, "class")= chr "col_spec"
+
 Question 3
 ==========
 
@@ -22,27 +233,27 @@ Question 4
 hist(imports85$price, col="blue",sub='Histogram showing how many times each price level occurs' )
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 ``` r
 boxplot(imports85$horsepower,horizontal = TRUE, sub='Summarizes the distribution of Horsepower' )
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-2.png)
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-2-2.png)
 
 ``` r
 bs_frequency <- table(imports85$body_style)
 barplot(sort(bs_frequency,decreasing = TRUE),sub="Shows number of cars with each Body Style")
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-3.png)
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-2-3.png)
 
 ``` r
 stars(imports85[imports85$aspiration=='turbo',c('wheel_base','length','width',
                                                   'height','price')])
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-4.png) The Stars plot displays the five variables(wheel\_base, length, width, height, and price) for each car that has turbo aspiration.
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-2-4.png) The Stars plot displays the five variables(wheel\_base, length, width, height, and price) for each car that has turbo aspiration.
 
 Question 5
 ==========
@@ -192,13 +403,13 @@ cor_qdat <-  cor(qdat)
 corrplot(cor_qdat,method='circle')
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ``` r
 corrplot(cor_qdat,method='color',order="hclust")
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-3-2.png) These two correlograms let us observe that city mpg and highway mpg are more positively correlated with each other than any two variables. It also shows us that wheelbase,length,width,curb weight,bore,horsepower,engine size,and price are all fairly positively correlated with each other. Comparatively, those variables are all negatively correlated with mpg(both city and highway). Stroke is entirely or almost entirely uncorrelated with many variables.
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-4-2.png) These two correlograms let us observe that city mpg and highway mpg are more positively correlated with each other than any two variables. It also shows us that wheelbase,length,width,curb weight,bore,horsepower,engine size,and price are all fairly positively correlated with each other. Comparatively, those variables are all negatively correlated with mpg(both city and highway). Stroke is entirely or almost entirely uncorrelated with many variables.
 
 Question 8.1
 ============
@@ -308,7 +519,7 @@ barplot(eigs, las = 1, names.arg = paste('PC', 1:ncol(qdat)),
         main = 'Bar-chart of eigenvalues')
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-4-1.png) 53.9% of the variation in the data is captured by the first PC, 16.2% is captured by the second PC, and 8.8% of the variation is captured by the third PC. ~89% of the variation in data is captured by the first 3 PC. \#\#Question 8.2
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-5-1.png) 53.9% of the variation in the data is captured by the first PC, 16.2% is captured by the second PC, and 8.8% of the variation is captured by the third PC. ~89% of the variation in data is captured by the first 3 PC. \#\#Question 8.2
 
 ``` r
 imports85_pca_prcomp$x
@@ -907,7 +1118,7 @@ points(imports85_pca_prcomp$x[ ,1], imports85_pca_prcomp$x[ ,2], pch=19,
        col = "blue",main="Individual Vehicles")
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 ``` r
 plot(imports85_pca_prcomp$rotation[,1],imports85_pca_prcomp$rotation[,2],col='red',
@@ -915,4 +1126,4 @@ plot(imports85_pca_prcomp$rotation[,1],imports85_pca_prcomp$rotation[,2],col='re
 text(imports85_pca_prcomp$rotation[,1],imports85_pca_prcomp$rotation[,2],labels=colnames(qdat))
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-5-2.png) These plots demonstrate that way\_mpg,city\_mpg, then horespower,engine size, bore,curb weight,width,length,and wheel base contribute largely to PC2. This makes sense with our observations from \#7, as the latter group is highly negatively correlated with the former. Similarly, peak rpm and compression ration contribute heavily to PC1.
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-6-2.png) These plots demonstrate that way\_mpg,city\_mpg, then horespower,engine size, bore,curb weight,width,length,and wheel base contribute largely to PC2. This makes sense with our observations from \#7, as the latter group is highly negatively correlated with the former. Similarly, peak rpm and compression ration contribute heavily to PC1.
