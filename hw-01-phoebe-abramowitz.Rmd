@@ -158,8 +158,9 @@ a) "NULL" is returned
 b)mtcars[, mpg] fails to return the vector 
 c)This is becuase putting mpg as the second index indicates that we're trying to retrieve the row by it's name, which should be a character in quotes to indicate that its a row name.
 d) YES you can include and R list of the proper length as the column of a data frame because the data frame itself is a list.
+#STILL NEED THESE
 e)When you apply as.list() to a data frame, 
-
+f)
 #Question 7
 ```{r}
 qdat <-  na.omit(imports85[,c(
@@ -218,5 +219,5 @@ plot(imports85_pca_prcomp$rotation[,1],imports85_pca_prcomp$rotation[,2],col='re
      xlab='PC2',ylab = 'PC1',pch=19,main="Eigenvectors")
 text(imports85_pca_prcomp$rotation[,1],imports85_pca_prcomp$rotation[,2],labels=colnames(qdat))
 ```
-These plots demonstrate that way_mpg,city_mpg, then horespower,engine size, bore,curb weight,width,length,and wheel base contribute largely to PC2. This makes sense as the latter group is highly negatively correlated with the former. Similarly, peak rpm and compression ration contribute heavily to PC1.
+These plots demonstrate that way_mpg,city_mpg, then horespower,engine size, bore,curb weight,width,length,and wheel base contribute largely to PC2. This makes sense with our observations from #7, as the latter group is highly negatively correlated with the former. Similarly, peak rpm and compression ration contribute heavily to PC1.
 
