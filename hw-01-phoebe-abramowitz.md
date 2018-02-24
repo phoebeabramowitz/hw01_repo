@@ -10,33 +10,29 @@ Question 3
 ==========
 
 a)If you don't provide a vector of column names when invoking read.csv('imports-85.data'), the entries of the first row of data become the column names.
-
 b)If you don't provide a vector of column names when invoking read.csv('imports-85.data',header=FALSE), then the column names of the imported data are "V1","V2",...,"V26"
-
 c)If you don't specify how missing values are codified, then the data type of any column that contains "?" will be Factor.
-
-1.  The second object is bigger becuase characters take twice as many bits as integers and we specified many types as characters.
-
+d) The second object is bigger becuase characters take twice as many bits as integers and we specified many types as characters.
 e)If you do it as an R matrix, all the ones of the type character become NA becuase they're data types that can't be transformed into integers.
 
 Question 4
 ==========
 
 ``` r
-hist(imports85$price, col="blue")
+hist(imports85$price, col="blue",sub='Histogram showing how many times each price level occurs' )
 ```
 
 ![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
 ``` r
-boxplot(imports85$horsepower,horizontal = TRUE)
+boxplot(imports85$horsepower,horizontal = TRUE, sub='Summarizes the distribution of Horsepower' )
 ```
 
 ![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-2.png)
 
 ``` r
 bs_frequency <- table(imports85$body_style)
-barplot(sort(bs_frequency,decreasing = TRUE))
+barplot(sort(bs_frequency,decreasing = TRUE),sub="Shows number of cars with each Body Style")
 ```
 
 ![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-3.png)
@@ -46,7 +42,10 @@ stars(imports85[imports85$aspiration=='turbo',c('wheel_base','length','width',
                                                   'height','price')])
 ```
 
-![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-4.png) \#Question 5
+![](hw-01-phoebe-abramowitz_files/figure-markdown_github/unnamed-chunk-1-4.png) The Stars plot displays the five variables(wheel\_base, length, width, height, and price) for each car that has turbo aspiration.
+
+Question 5
+==========
 
 ``` r
 gas_cars <- imports85[imports85$fuel_type=='gas',]
@@ -155,10 +154,15 @@ median(imports85[imports85$city_mpg<=bottom_city_mpg,'price'],na.rm=TRUE)
 Question 6
 ==========
 
-1.  "NULL" is returned b)mtcars\[, mpg\] fails to return the vector c)This is becuase putting mpg as the second index indicates that we're trying to retrieve the row by it's name, which should be a character in quotes to indicate that its a row name.
-2.  YES you can include and R list of the proper length as the column of a data frame because the data frame itself is a list. \#STILL NEED THESE e)When you apply as.list() to a data frame,
-3.  Question 7
-    ==========
+1.  "NULL" is returned
+2.  mtcars\[, mpg\] fails to return the vector
+3.  This is becuase putting mpg as the second index indicates that we're trying to retrieve the row by it's name, which should be a character in quotes to indicate that its a row name.
+4.  YES you can include and R list of the proper length as the column of a data frame because the data frame itself is a list.
+    e)When you apply as.list() to a data frame, under the heading of the name of the first column, every value from that first column is listed in the same order as the data frame, and similar lists are produced for the values of every column in the data frame.
+5.  You could use data.frame and input abc\[i\] as an argument to get desired ith column in the new dataframe.
+
+Question 7
+==========
 
 ``` r
 qdat <-  na.omit(imports85[,c(
