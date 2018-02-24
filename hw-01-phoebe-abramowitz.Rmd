@@ -158,11 +158,11 @@ a) "NULL" is returned
 b)mtcars[, mpg] fails to return the vector 
 c)This is becuase putting mpg as the second index indicates that we're trying to retrieve the row by it's name, which should be a character in quotes to indicate that its a row name.
 d) YES you can include and R list of the proper length as the column of a data frame because the data frame itself is a list.
-#STILL NEED THESE
-e)When you apply as.list() to a data frame, 
-f)
+e)When you apply as.list() to a data frame, under the heading of the name of the first column, every value from that first column is listed in the same order as the data frame, and similar lists are produced for the values of every column in the data frame. 
+f) You could use data.frame and input abc[i] as an argument to get desired ith column in the new dataframe.
 #Question 7
 ```{r}
+
 qdat <-  na.omit(imports85[,c(
   'wheel_base',
   'length',
